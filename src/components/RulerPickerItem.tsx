@@ -1,94 +1,3 @@
-// /* eslint-disable react-native/no-inline-styles */
-// import React from 'react';
-// import { View } from 'react-native';
-
-// export type RulerPickerItemProps = {
-//   /**
-//    * Gap between steps
-//    *
-//    * @default 10
-//    */
-//   gapBetweenSteps: number;
-//   /**
-//    * Height of the short step
-//    *
-//    * @default 20
-//    */
-//   shortStepHeight: number;
-//   /**
-//    * Height of the long step
-//    *
-//    * @default 40
-//    */
-//   longStepHeight: number;
-//   /**
-//    * Width of the steps
-//    *
-//    * @default 2
-//    */
-//   stepWidth: number;
-//   /**
-//    * Color of the short steps
-//    *
-//    * @default 'lightgray'
-//    */
-//   shortStepColor: string;
-//   /**
-//    * Color of the long steps
-//    *
-//    * @default 'gray'
-//    */
-//   longStepColor: string;
-// };
-
-// type Props = {
-//   index: number;
-//   isLast: boolean;
-// } & RulerPickerItemProps;
-
-// export const RulerPickerItem = React.memo(
-//   ({
-//     isLast,
-//     index,
-//     gapBetweenSteps,
-//     shortStepHeight,
-//     longStepHeight,
-//     stepWidth,
-//     shortStepColor,
-//     longStepColor,
-//   }: Props) => {
-//     const isLong = index % 10 === 0;
-//     const height = isLong ? longStepHeight : shortStepHeight;
-
-//     return (
-//       <View
-//         style={[
-//           {
-//             width: stepWidth,
-//             justifyContent: 'center',
-//             marginRight: isLast ? 0 : gapBetweenSteps,
-//             marginTop: shortStepHeight,
-//           },
-//         ]}
-//       >
-//         <View
-//           style={[
-//             {
-//               width: '100%',
-//               height: height,
-//               backgroundColor: isLong ? longStepColor : shortStepColor,
-//               marginTop: isLong ? 0 : shortStepHeight,
-//             },
-//           ]}
-//         />
-//       </View>
-//     );
-//   }
-// );
-
-
-
-
 import React from 'react';
 import { View, StyleSheet, Animated, ViewStyle } from 'react-native';
 import { RulerTheme } from 'src/utils/types';
@@ -125,6 +34,11 @@ export type RulerPickerItemProps = {
    */
   longStepColor: string;
   /**
+   * Color of the long steps
+   * @default 180
+   */
+  height?: number,
+  /**
    * Whether the ruler is vertical
    * @default false
    */
@@ -143,9 +57,9 @@ export type RulerPickerItemProps = {
    */
   showLabels?: boolean;
   /**
-  * Animated or not
-  */
- animated: boolean;
+   * Animated or not
+   */
+  animated: boolean;
   /**
    * Custom label component
    */
@@ -182,6 +96,7 @@ export const RulerPickerItem = React.memo(
     stepWidth,
     shortStepColor,
     longStepColor,
+    height=180,
     vertical = false,
     containerStyle,
     stepStyle,
@@ -258,6 +173,7 @@ export const RulerPickerItem = React.memo(
         style={[
           styles.container,
           {
+            height: height,
             [vertical ? 'height' : 'width']: stepWidth,
             [vertical ? 'marginBottom' : 'marginRight']: isLast
               ? 0
@@ -275,8 +191,8 @@ export const RulerPickerItem = React.memo(
               [vertical ? 'width' : 'height']: stepHeight,
               backgroundColor: stepColor,
               [vertical ? 'marginLeft' : 'marginTop']: isLong
-                ? 9
-                : shortStepHeight,
+                ? -12
+                : shortStepHeight-20,
             },
             stepStyle,
             animatedStyle,
@@ -290,7 +206,7 @@ export const RulerPickerItem = React.memo(
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+   justifyContent: 'center'
   },
   step: {
     backgroundColor: '#000000',

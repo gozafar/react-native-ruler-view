@@ -1,5 +1,5 @@
 import type { TextStyle, ViewStyle } from 'react-native';
-import { PRESET_THEMES } from 'src/components/RulerPicker';
+import { ThemeName } from './theme';
 
 export type RulerTheme = {
   indicatorColor: string;
@@ -40,12 +40,16 @@ export type RulerPickerItemProps = {
   showLabels?: boolean;
   renderLabel?: (value: number) => React.ReactNode;
   animationConfig?: AnimationConfig;
-  theme?: RulerTheme;
+  theme?: RulerTheme | ThemeName;
 };
 
 export type RulerPickerProps = {
   width?: number;
   height?: number;
+   /**
+   * min value of ruler
+   * @default 0
+   */
   min: number;
   max: number;
   step?: number;
@@ -54,10 +58,9 @@ export type RulerPickerProps = {
   unit?: string;
   indicatorHeight?: number;
   vertical?: boolean;
-  theme?: RulerTheme | keyof typeof PRESET_THEMES;
+  theme?: RulerTheme | ThemeName;
   hapticFeedback?: boolean;
   animated?: boolean;
-  customMarker?: React.ComponentType<any>;
   valueTextStyle?: TextStyle;
   unitTextStyle?: TextStyle;
   decelerationRate?: 'fast' | 'normal' | number;
@@ -65,6 +68,6 @@ export type RulerPickerProps = {
   showLabels?: boolean;
   renderLabel?: (value: number) => React.ReactNode;
   animationConfig?: AnimationConfig;
-  onValueChange?: (value: string) => void;
+  onValueChange?: (value: number) => void;
   onValueChangeEnd?: (value: string) => void;
 } & Partial<RulerPickerItemProps>;

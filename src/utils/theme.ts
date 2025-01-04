@@ -1,6 +1,4 @@
-import type { RulerTheme } from './types';
-
-export const PRESET_THEMES: Record<string, RulerTheme> = {
+export const PRESET_THEMES = {
   light: {
     indicatorColor: '#000000',
     shortStepColor: '#E0E0E0',
@@ -58,3 +56,5 @@ export const PRESET_THEMES: Record<string, RulerTheme> = {
     backgroundColor: '#FFFFFF',
   },
 } as const;
+
+export type ThemeName = keyof typeof PRESET_THEMES;
