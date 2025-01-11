@@ -18,10 +18,10 @@ export default function App() {
         height={300}
         fractionDigits={0}
         initialValue={0}
-        // indicatorHeight={150}
         onValueChange={(number) => console.log('onValueChange', number)}
         onValueChangeEnd={(number) => console.log('onValueChangeEnd', number)}
       />
+
       {/* Basic usage */}
       <RulerPicker
         min={0}
@@ -30,10 +30,9 @@ export default function App() {
         step={1}
         initialValue={0}
         theme="ocean"
-        // vertical
+        vertical
       />
 
-      {/* Vertical ruler with labels */}
       <RulerPicker
         min={0}
         max={200}
