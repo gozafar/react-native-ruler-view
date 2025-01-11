@@ -1,82 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Animated, ViewStyle } from 'react-native';
-import { RulerTheme } from 'src/utils/types';
-
-export type RulerPickerItemProps = {
-  /**
-   * Gap between steps
-   * @default 10
-   */
-  gapBetweenSteps: number;
-  /**
-   * Height of the short step
-   * @default 20
-   */
-  shortStepHeight: number;
-  /**
-   * Height of the long step
-   * @default 40
-   */
-  longStepHeight: number;
-  /**
-   * Width of the steps
-   * @default 2
-   */
-  stepWidth: number;
-  /**
-   * Color of the short steps
-   * @default 'lightgray'
-   */
-  shortStepColor: string;
-  /**
-   * Color of the long steps
-   * @default 'gray'
-   */
-  longStepColor: string;
-  /**
-   * Color of the long steps
-   * @default 180
-   */
-  height?: number;
-  /**
-   * Whether the ruler is vertical
-   * @default false
-   */
-  vertical?: boolean;
-  /**
-   * Custom styles for the container
-   */
-  stepStyle?: ViewStyle;
-  /**
-   * Show step labels
-   * @default false
-   */
-  showLabels?: boolean;
-  /**
-   * Animated or not
-   */
-  animated: boolean;
-  /**
-   * Animation configuration
-   */
-  animationConfig?: {
-    duration?: number;
-    type?: 'spring' | 'timing';
-    springConfig?: {
-      tension?: number;
-      friction?: number;
-    };
-  };
-  /**
-   * Theme configuration
-   */
-  theme?: RulerTheme;
-};
-
-type Props = {
-  index: number;
-  isLast: boolean;
-} & RulerPickerItemProps;
+import { View, StyleSheet, Animated } from 'react-native';
+import { RulerPickerItemProp, RulerTheme } from 'src/utils/types';
 
 export const RulerPickerItem = React.memo(
   ({
@@ -90,10 +14,9 @@ export const RulerPickerItem = React.memo(
     longStepColor,
     vertical = false,
     stepStyle,
-    showLabels = false,
     animationConfig,
     theme,
-  }: Props) => {
+  }: RulerPickerItemProp) => {
     const isLong = index % 10 === 0;
     const stepHeight = isLong ? longStepHeight : shortStepHeight;
     const stepColor = isLong ? longStepColor : shortStepColor;
@@ -135,14 +58,14 @@ export const RulerPickerItem = React.memo(
       : {};
 
     const renderStepLabel = () => {
-      if (!showLabels || !isLong) return null;
+      if (!isLong) return null;
 
       return (
         <Animated.Text
           style={[
             styles.label,
             {
-              color: theme?.textColor || '#000000',
+              color: (theme as RulerTheme)?.textColor || '#000000',
               [vertical ? 'marginLeft' : 'marginTop']: 4,
             },
             animatedStyle,
@@ -175,7 +98,7 @@ export const RulerPickerItem = React.memo(
               backgroundColor: stepColor,
               [vertical ? 'marginLeft' : 'marginTop']: isLong
                 ? -12
-                : shortStepHeight - 20,
+                : shortStepHeight - 30,
             },
             stepStyle,
             animatedStyle,

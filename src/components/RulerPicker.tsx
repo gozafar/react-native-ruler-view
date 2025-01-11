@@ -1,7 +1,12 @@
-import React, { useCallback, useEffect, useRef, useMemo } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useMemo,
+  useReducer,
+} from 'react';
 import {
   Dimensions,
-  StyleSheet,
   View,
   Text,
   Animated,
@@ -19,12 +24,13 @@ import { RulerPickerItem } from './RulerPickerItem';
 import { RulerPickerProps } from 'src/utils/types';
 import { PRESET_THEMES } from 'src/utils/theme';
 import { calculateCurrentValue, getInitialOffset } from 'src/utils';
+import { getStyles } from './RulerPicker.styles';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+const { width: windowWidth } = Dimensions.get('window');
 
 export const RulerPicker: React.FC<RulerPickerProps> = ({
   width = windowWidth,
-  height = windowHeight,
+  height = 300,
   min,
   max,
   step = 1,
@@ -44,6 +50,7 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
   valueTextStyle,
   unitTextStyle,
   decelerationRate = 'normal',
+  showLabels = true,
   accessibility,
   onValueChange,
   onValueChangeEnd,
@@ -59,6 +66,16 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
     return null;
   }
 
+  const listRef = useRef<FlatList<number>>(null);
+  const stepTextRef = useRef<TextInput>(null);
+  const increasingRef = useRef(true);
+  const prevValue = useRef<string>(initialValue.toFixed(fractionDigits));
+  const prevMomentumValue = useRef<string>(
+    initialValue.toFixed(fractionDigits)
+  );
+  const scrollPosition = useRef(new Animated.Value(0)).current;
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+
   const activeTheme =
     typeof theme === 'string'
       ? PRESET_THEMES[theme as keyof typeof PRESET_THEMES]
@@ -69,13 +86,15 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
     [itemAmount]
   );
 
-  const listRef = useRef<FlatList<number>>(null);
-  const stepTextRef = useRef<TextInput>(null);
-  const prevValue = useRef<string>(initialValue.toFixed(fractionDigits));
-  const prevMomentumValue = useRef<string>(
-    initialValue.toFixed(fractionDigits)
+  const styles = getStyles(
+    height,
+    width,
+    vertical,
+    indicatorHeight,
+    stepWidth,
+    longStepHeight,
+    activeTheme
   );
-  const scrollPosition = useRef(new Animated.Value(0)).current;
 
   const announceValue = useCallback(
     (value: string) => {
@@ -101,6 +120,12 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
         fractionDigits
       );
 
+      if (parseFloat(newStep) > parseFloat(prevValue.current)) {
+        increasingRef.current = true;
+      } else if (parseFloat(newStep) < parseFloat(prevValue.current)) {
+        increasingRef.current = false;
+      }
+
       if (prevValue.current !== newStep) {
         if (hapticFeedback && Platform.OS !== 'web') {
           Vibration.vibrate(1);
@@ -109,6 +134,7 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
         stepTextRef.current?.setNativeProps({ text: newStep });
         announceValue(newStep);
       }
+      forceUpdate(); // Forces a re-render
 
       prevValue.current = newStep;
     },
@@ -129,6 +155,7 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
     scrollPosition.addListener(valueCallback);
     return () => scrollPosition.removeAllListeners();
   }, [scrollPosition, valueCallback]);
+
   useEffect(() => {
     const initialOffset = getInitialOffset(
       initialValue,
@@ -156,19 +183,20 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
     { useNativeDriver: true }
   );
 
-  const renderSeparator = useCallback(() => {
-    const separatorSize = vertical ? height : width;
+  const renderSeparator = (value = 0) => {
+    const separatorHeight = vertical ? value || height * 0.65 : undefined;
+
+    const separatorWidth = vertical ? undefined : width * 0.472;
+
     return (
       <View
         style={{
-          height: vertical
-            ? separatorSize * 0.6124 - stepWidth * 0.5
-            : undefined,
-          width: vertical ? undefined : separatorSize * 0.5 - stepWidth * 0.5,
+          height: separatorHeight,
+          width: separatorWidth,
         }}
       />
     );
-  }, [height, stepWidth, vertical, width]);
+  };
 
   const renderItem = useCallback(
     ({ item: index }: { item: number }) => {
@@ -226,53 +254,94 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
       announceValue,
       fractionDigits,
       gapBetweenSteps,
+      stepWidth,
       max,
       min,
       onValueChangeEnd,
       step,
-      stepWidth,
       vertical,
     ]
   );
 
-  return (
-    <View
+  const getLabel = (value: string, color: string) => (
+    <Text
       style={[
-        styles.container,
+        styles.text,
         {
-          width: width > 300 ? width : 300,
-          height: height > 300 ? height : 300,
-          backgroundColor: activeTheme!.backgroundColor,
-          flexDirection: vertical ? 'row' : 'column',
+          color: color,
         },
       ]}
+      numberOfLines={1}
+      adjustsFontSizeToFit
+    >
+      {value}
+    </Text>
+  );
+
+  const getLabelNumber = () => (
+    <View pointerEvents="none" style={[styles.displayTextContainer]}>
+      {showLabels &&
+        getLabel(
+          parseInt(prevValue.current) - step * 2 >= min
+            ? (parseInt(prevValue.current) - step * 2).toString()
+            : '',
+          'lightgray'
+        )}
+
+      {showLabels &&
+        getLabel(
+          parseInt(prevValue.current) - step >= min
+            ? (parseInt(prevValue.current) - step).toString()
+            : '',
+          'gray'
+        )}
+
+      <View style={styles.selectedText}>
+        <Text
+          style={[styles.valueText, valueTextStyle]}
+          numberOfLines={1}
+          adjustsFontSizeToFit
+        >
+          {parseInt(prevValue.current).toFixed(fractionDigits)}{' '}
+          {unit && <Text style={[styles.unitText, unitTextStyle]}>{unit}</Text>}
+        </Text>
+      </View>
+
+      {showLabels &&
+        getLabel(
+          parseInt(prevValue.current) + step >= max + step
+            ? ''
+            : (parseInt(prevValue.current) + step).toString(),
+          'gray'
+        )}
+
+      {showLabels &&
+        getLabel(
+          parseInt(prevValue.current) + step * 2 >= max + step
+            ? ''
+            : (parseInt(prevValue.current) + step * 2).toString(),
+          'lightgray'
+        )}
+    </View>
+  );
+
+  return (
+    <View
+      style={styles.container}
       accessible={accessibility?.enabled}
       accessibilityRole="adjustable"
     >
+      {getLabelNumber()}
+
       <Animated.FlatList
         ref={listRef}
         data={arrData}
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
-        style={[
-          {
-            width: width * 0.95,
-            overflow: 'hidden',
-            borderRadius: 20,
-            flexGrow: 0.3,
-            margin: 10,
-            backgroundColor: 'red',
-          },
-          containerStyle,
-        ]}
-        contentContainerStyle={{
-          alignSelf: 'center',
-          minHeight: 80,
-          marginLeft: vertical ? '35%' : 0,
-          marginTop: vertical ? -60 : 0,
-        }}
-        ListHeaderComponent={renderSeparator}
-        ListFooterComponent={renderSeparator}
+        style={[styles.rulerContainer, containerStyle]}
+        contentContainerStyle={styles.rulerContent}
+        ListHeaderComponent={() => renderSeparator()}
+        ListFooterComponent={() => renderSeparator(vertical ? height * 0.1 : 0)}
         onScroll={scrollHandler}
         onMomentumScrollEnd={onMomentumScrollEnd}
         snapToOffsets={arrData.map(
@@ -285,93 +354,8 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
         showsVerticalScrollIndicator={false}
         horizontal={!vertical}
       />
-      <View
-        pointerEvents="none"
-        style={[
-          styles.indicator,
-          {
-            [vertical ? 'top' : 'left']: '50%',
-            flexDirection: vertical ? 'row-reverse' : 'column',
-            alignItems: vertical ? 'center' : 'flex-start',
-          },
-        ]}
-      >
-        <View
-          style={[
-            styles.displayTextContainer,
-            {
-              marginLeft: vertical ? 0 : -30,
-            },
-          ]}
-        >
-          <TextInput
-            ref={stepTextRef}
-            defaultValue={initialValue.toFixed(fractionDigits)}
-            style={[
-              {
-                lineHeight:
-                  valueTextStyle?.fontSize ?? styles.valueText.fontSize,
-                color: activeTheme!.textColor,
-              },
-              styles.valueText,
-              valueTextStyle,
-            ]}
-          />
-          {unit && (
-            <Text
-              style={[
-                {
-                  lineHeight:
-                    unitTextStyle?.fontSize ?? styles.unitText.fontSize,
-                  color: activeTheme!.textColor,
-                },
-                styles.unitText,
-                unitTextStyle,
-              ]}
-            >
-              {unit}
-            </Text>
-          )}
-        </View>
-        <View
-          style={[
-            {
-              width: vertical ? indicatorHeight : stepWidth,
-              height: vertical ? stepWidth : indicatorHeight,
-              backgroundColor: activeTheme!.indicatorColor,
-            },
-          ]}
-        />
-      </View>
+
+      <View style={styles.indicator} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    // paddingTop: 150,
-  },
-  indicator: {
-    justifyContent: 'space-between',
-    height: 100,
-    width: 200,
-    position: 'absolute',
-    top: 30,
-    left: '32%',
-  },
-  displayTextContainer: {
-    flexDirection: 'row',
-    width: 200,
-  },
-  valueText: {
-    fontSize: 32,
-    fontWeight: '800',
-    margin: 0,
-    padding: 0,
-  },
-  unitText: {
-    fontSize: 24,
-    fontWeight: '400',
-    marginLeft: 6,
-  },
-});

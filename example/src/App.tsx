@@ -14,10 +14,11 @@ export default function App() {
         unit="cm"
         max={240}
         step={1}
+        width={200}
         height={300}
         fractionDigits={0}
         initialValue={0}
-        containerStyle={{ flexGrow: 0.3 }}
+        // indicatorHeight={150}
         onValueChange={(number) => console.log('onValueChange', number)}
         onValueChangeEnd={(number) => console.log('onValueChangeEnd', number)}
       />
@@ -36,11 +37,12 @@ export default function App() {
       <RulerPicker
         min={0}
         max={200}
-        step={1}
-        width={300}
+        step={2}
+        width={250}
+        height={400}
         vertical
-        showLabels
-        theme="sunset"
+        showLabels={false}
+        theme="light"
         accessibility={{
           enabled: true,
           labelFormat: 'Value: ${value} centimeters',
@@ -62,13 +64,13 @@ export default function App() {
         step={1}
         hapticFeedback
         width={300}
-        height={800}
+        height={400}
         theme={{
-          indicatorColor: 'red',
+          indicatorColor: 'cyan',
           shortStepColor: 'green',
           longStepColor: 'blue',
           textColor: 'cyan',
-          backgroundColor: 'gray',
+          backgroundColor: 'light',
         }}
       />
     </ScrollView>
