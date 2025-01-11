@@ -38,7 +38,6 @@ export type RulerPickerItemProps = {
   containerStyle?: ViewStyle;
   stepStyle?: ViewStyle;
   showLabels?: boolean;
-  renderLabel?: (value: number) => React.ReactNode;
   animationConfig?: AnimationConfig;
   theme?: RulerTheme | ThemeName;
 };
@@ -66,7 +65,6 @@ export type RulerPickerProps = {
   decelerationRate?: 'fast' | 'normal' | number;
   accessibility?: RulerAccessibilityConfig;
   showLabels?: boolean;
-  renderLabel?: (value: number) => React.ReactNode;
   animationConfig?: AnimationConfig;
   onValueChange?: (value: number) => void;
   onValueChangeEnd?: (value: string) => void;

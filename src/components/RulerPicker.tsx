@@ -39,6 +39,7 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
   gapBetweenSteps = 10,
   shortStepHeight = 20,
   longStepHeight = 40,
+  containerStyle,
   stepWidth = 2,
   valueTextStyle,
   unitTextStyle,
@@ -46,7 +47,6 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
   accessibility,
   onValueChange,
   onValueChangeEnd,
-  renderLabel,
 }: RulerPickerProps) => {
   // Validate props
   if (min >= max) {
@@ -184,7 +184,6 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
           longStepColor={activeTheme!.longStepColor}
           vertical={vertical}
           animated={animated}
-          renderLabel={renderLabel}
         />
       );
     },
@@ -255,7 +254,20 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
         data={arrData}
         keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
+        style={[
+          {
+            width: width * 0.95,
+            overflow: 'hidden',
+            borderRadius: 20,
+            flexGrow: 0.3,
+            margin: 10,
+            backgroundColor: 'red',
+          },
+          containerStyle,
+        ]}
         contentContainerStyle={{
+          alignSelf: 'center',
+          minHeight: 80,
           marginLeft: vertical ? '35%' : 0,
           marginTop: vertical ? -60 : 0,
         }}
@@ -349,7 +361,7 @@ const styles = StyleSheet.create({
   },
   displayTextContainer: {
     flexDirection: 'row',
-    width: 200
+    width: 200,
   },
   valueText: {
     fontSize: 32,

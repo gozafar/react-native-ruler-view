@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { RulerPicker } from '../../src/index';
 
 export default function App() {
@@ -17,6 +17,7 @@ export default function App() {
         height={300}
         fractionDigits={0}
         initialValue={0}
+        containerStyle={{ flexGrow: 0.3 }}
         onValueChange={(number) => console.log('onValueChange', number)}
         onValueChangeEnd={(number) => console.log('onValueChangeEnd', number)}
       />
@@ -69,13 +70,6 @@ export default function App() {
           textColor: 'cyan',
           backgroundColor: 'gray',
         }}
-        renderLabel={(value) => (
-          <View
-            style={{ padding: 4, backgroundColor: '#FFE0E0', borderRadius: 4 }}
-          >
-            <Text style={{ color: 'black', fontSize: 30 }}>{value}ghfg</Text>
-          </View>
-        )}
       />
     </ScrollView>
   );
@@ -84,7 +78,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20
+    paddingTop: 20,
   },
   box: {
     width: 60,
