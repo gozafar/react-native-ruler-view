@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-ruler-picker": ["./src/index"]
+      "react-native-ruler": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

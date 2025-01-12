@@ -14,7 +14,7 @@ export default function App() {
         unit="cm"
         max={240}
         step={1}
-        width={200}
+        width={300}
         height={300}
         fractionDigits={0}
         initialValue={0}
@@ -27,9 +27,9 @@ export default function App() {
         min={0}
         max={200}
         height={300}
+        width={300}
         step={1}
         initialValue={0}
-        theme="ocean"
         vertical
       />
 
@@ -37,11 +37,14 @@ export default function App() {
         min={0}
         max={200}
         step={2}
-        width={250}
+        width={240}
+        indicatorHeight={70}
         height={400}
         vertical
         showLabels={false}
-        theme="light"
+        containerStyle={{
+          backgroundColor: '#876796'
+        }}
         accessibility={{
           enabled: true,
           labelFormat: 'Value: ${value} centimeters',
@@ -63,12 +66,15 @@ export default function App() {
         step={1}
         hapticFeedback
         width={300}
-        height={400}
+        height={200}
+        containerStyle={{
+          backgroundColor: 'red'
+        }}
         theme={{
-          indicatorColor: 'cyan',
+          indicatorColor: 'green',
           shortStepColor: 'green',
           longStepColor: 'blue',
-          textColor: 'cyan',
+          textColor: 'green',
           backgroundColor: 'light',
         }}
       />

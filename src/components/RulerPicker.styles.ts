@@ -31,7 +31,8 @@ export const getStyles = (
 
   const styles = StyleSheet.create({
     container: {
-      width: width >= 300 ? width : !vertical ? 300 : width >= 250 ? width : 250,
+      width:
+        width >= 300 ? width : !vertical ? 300 : width >= 250 ? width : 250,
       height: height >= 300 ? height : 300,
       backgroundColor: activeTheme!.backgroundColor,
       flexDirection: vertical ? 'row' : 'column',
@@ -41,10 +42,16 @@ export const getStyles = (
       overflow: 'hidden',
       borderRadius: 20,
       margin: 10,
-      width: width >= 300 ? width * 0.95 : !vertical ? 190 : width >= 250 ? width * 0.95 : 150,
+      width:
+        width >= 300
+          ? width * 0.95
+          : !vertical
+            ? 190
+            : width >= 250
+              ? width * 0.95
+              : 150,
       height: vertical ? height * 0.75 : undefined,
       flexGrow: 1,
-      marginLeft: vertical ? 10 : 0,
       alignSelf: vertical ? undefined : 'center',
     },
     rulerContent: {
@@ -57,7 +64,7 @@ export const getStyles = (
       position: 'relative',
       alignSelf: 'center',
       top: top,
-      left: vertical ? '-38%' : -5,
+      left: vertical ? '-43%' : -5,
       width: vertical ? indicatorHeight : stepWidth,
       height: vertical ? stepWidth : indicatorHeight,
       backgroundColor: activeTheme!.indicatorColor,
@@ -68,7 +75,7 @@ export const getStyles = (
       marginBottom: longStepHeight,
       alignItems: 'center',
       marginTop: vertical ? 50 : 0,
-      marginLeft: vertical ? -30 : 0,
+      marginLeft: vertical ? -(width * 0.12) : 0,
     },
     valueText: {
       fontSize: 32,
@@ -93,7 +100,7 @@ export const getStyles = (
     text: {
       textAlign: 'center',
       height: vertical ? height * 0.15 : undefined,
-      minWidth: 60,
+      width: vertical ? undefined : width * 0.15,
       maxWidth: 100,
       fontSize: 20,
     },

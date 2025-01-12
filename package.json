@@ -1,6 +1,6 @@
 {
-  "name": "react-native-ruler-picker",
-  "version": "0.2.2",
+  "name": "react-native-animated-ruler",
+  "version": "0.0.1",
   "description": "⚡ Lightning-fast and customizable Ruler Picker component for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -41,17 +41,16 @@
     "android",
     "ruler",
     "picker",
-    "react-native-ruler-picker",
-    "react-native-picker",
-    "react-native-ruler"
+    "react-native-rule",
+    "react-native-animated-ruler"
   ],
-  "repository": "https://github.com/rnheroes/react-native-ruler-picker",
-  "author": "React Native Heroes <yigithanyucedag@gmail.com> (https://github.com/rnheroes)",
+  "repository": "https://github.com/Inayat567/react-native-ruler",
+  "author": "React Native Heroes <inayatalibalti100@gmail.com> (https://github.com/inayat567)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rnheroes/react-native-ruler-picker/issues"
+    "url": "https://github.com/Inayat567/react-native-ruler/issues"
   },
-  "homepage": "https://github.com/rnheroes/react-native-ruler-picker#readme",
+  "homepage": "https://github.com/Inayat567/react-native-ruler/blob/main/README.md",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

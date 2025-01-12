@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import { RulerPickerItemProp, RulerTheme } from 'src/utils/types';
+import { RulerPickerItemProp } from 'src/utils/types';
 
 export const RulerPickerItem = React.memo(
   ({
@@ -15,7 +15,6 @@ export const RulerPickerItem = React.memo(
     vertical = false,
     stepStyle,
     animationConfig,
-    theme,
   }: RulerPickerItemProp) => {
     const isLong = index % 10 === 0;
     const stepHeight = isLong ? longStepHeight : shortStepHeight;
@@ -57,25 +56,6 @@ export const RulerPickerItem = React.memo(
         }
       : {};
 
-    const renderStepLabel = () => {
-      if (!isLong) return null;
-
-      return (
-        <Animated.Text
-          style={[
-            styles.label,
-            {
-              color: (theme as RulerTheme)?.textColor || '#000000',
-              [vertical ? 'marginLeft' : 'marginTop']: 4,
-            },
-            animatedStyle,
-          ]}
-        >
-          {index}
-        </Animated.Text>
-      );
-    };
-
     return (
       <View
         style={[
@@ -104,7 +84,6 @@ export const RulerPickerItem = React.memo(
             animatedStyle,
           ]}
         />
-        {renderStepLabel()}
       </View>
     );
   }

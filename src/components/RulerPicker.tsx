@@ -208,8 +208,8 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
           longStepHeight={longStepHeight}
           gapBetweenSteps={gapBetweenSteps}
           stepWidth={stepWidth}
-          shortStepColor={activeTheme!.shortStepColor}
-          longStepColor={activeTheme!.longStepColor}
+          shortStepColor={activeTheme.shortStepColor}
+          longStepColor={activeTheme.longStepColor}
           vertical={vertical}
           animated={animated}
         />
@@ -354,7 +354,6 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
         showsVerticalScrollIndicator={false}
         horizontal={!vertical}
       />
-
       <View style={styles.indicator} />
     </View>
   );
