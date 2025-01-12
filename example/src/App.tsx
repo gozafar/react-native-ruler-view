@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { ScrollView, StyleSheet } from 'react-native';
-import { RulerPicker } from '../../src/index';
+import { RulerPicker } from 'react-native-ruler-view';
 
 export default function App() {
   return (

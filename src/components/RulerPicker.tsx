@@ -21,9 +21,9 @@ import type {
   FlatList,
 } from 'react-native';
 import { RulerPickerItem } from './RulerPickerItem';
-import { RulerPickerProps } from 'src/utils/types';
-import { PRESET_THEMES } from 'src/utils/theme';
-import { calculateCurrentValue, getInitialOffset } from 'src/utils';
+import { RulerPickerProps } from '../utils/types';
+import { PRESET_THEMES } from '../utils/theme';
+import { calculateCurrentValue, getInitialOffset } from '../utils';
 import { getStyles } from './RulerPicker.styles';
 
 const { width: windowWidth } = Dimensions.get('window');
