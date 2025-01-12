@@ -14,47 +14,10 @@ export const RulerPickerItem = React.memo(
     longStepColor,
     vertical = false,
     stepStyle,
-    animationConfig,
   }: RulerPickerItemProp) => {
     const isLong = index % 10 === 0;
     const stepHeight = isLong ? longStepHeight : shortStepHeight;
     const stepColor = isLong ? longStepColor : shortStepColor;
-
-    // Animation setup
-    const animatedValue = React.useRef(new Animated.Value(0)).current;
-
-    React.useEffect(() => {
-      if (animationConfig) {
-        const animation =
-          animationConfig.type === 'spring'
-            ? Animated.spring(animatedValue, {
-                toValue: 1,
-                useNativeDriver: true,
-                ...animationConfig.springConfig,
-              })
-            : Animated.timing(animatedValue, {
-                toValue: 1,
-                duration: animationConfig.duration || 300,
-                useNativeDriver: true,
-              });
-
-        animation.start();
-      }
-    }, [animatedValue, animationConfig]);
-
-    const animatedStyle = animationConfig
-      ? {
-          opacity: animatedValue,
-          transform: [
-            {
-              scale: animatedValue.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.5, 1],
-              }),
-            },
-          ],
-        }
-      : {};
 
     return (
       <View
@@ -81,7 +44,6 @@ export const RulerPickerItem = React.memo(
                 : shortStepHeight - 30,
             },
             stepStyle,
-            animatedStyle,
           ]}
         />
       </View>

@@ -4,6 +4,8 @@ A customizable, interactive ruler picker component for React Native. Perfect for
 
 **Full credits to the original author of [react-native-ruler-picker](https://github.com/rnheroes/react-native-ruler-picker).**
 
+![Preview](docs/preview.gif)
+
 ## Features
 
 - Vertical and horizontal orientations.
@@ -20,14 +22,13 @@ A customizable, interactive ruler picker component for React Native. Perfect for
 
 To install `react-native-ruler-view` into your project, use the following command:
 
-bash
-npm install react-native-ruler-view
-# or if you're using yarn
-yarn add react-native-ruler-view
+``` npm install react-native-ruler-view```
+or if you're using yarn
+``` yarn add react-native-ruler-view```
 
 ## For iOS:
 Make sure to install the necessary CocoaPods dependencies:
-cd ios; pod install; cd ..
+```cd ios; pod install; cd ..```
 
 ## Usage
 # Basic Examples
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
 | Name                | Type                            | Required | Default Value | Description                              |
 |---------------------|---------------------------------|----------|---------------|------------------------------------------|
 | width               | number                         | No       | windowWidth   | Width of the ruler picker                |
-| height              | number                         | No       | 500           | Height of the ruler picker               |
+| height              | number                         | No       | 300           | Height of the ruler picker               |
 | min                 | number                         | Yes      | -             | Minimum value of the ruler picker        |
 | max                 | number                         | Yes      | -             | Maximum value of the ruler picker        |
 | step                | number                         | No       | 1             | Step of the ruler picker                 |
@@ -142,15 +143,14 @@ const styles = StyleSheet.create({
 | unit                | string                         | No       | 'cm'          | Unit of the ruler picker                 |
 | indicatorHeight     | number                         | No       | 80            | Height of the indicator                  |
 | vertical            | boolean                        | No       | false         | Enables vertical orientation             |
-| theme               | RulerTheme or ThemeName        | No       | -             | Theme for the ruler picker               |
+| theme               | RulerTheme or ThemeName        | No       | 'light'             | Theme for the ruler picker               |
 | hapticFeedback      | boolean                        | No       | false         | Enables haptic feedback                  |
-| animated            | boolean                        | No       | false         | Enables animation                        |
+| animated            | boolean                        | No       | true         | Enables animation                        |
 | valueTextStyle      | TextStyle                      | No       | -             | Text style of the value                  |
 | unitTextStyle       | TextStyle                      | No       | -             | Text style of the unit                   |
 | decelerationRate    | 'fast' \| 'normal' \| number   | No       | 'normal'      | Deceleration rate of the ruler picker    |
 | accessibility       | RulerAccessibilityConfig       | No       | -             | Accessibility configuration              |
-| showLabels          | boolean                        | No       | false         | Show labels                              |
-| animationConfig     | AnimationConfig                | No       | -             | Animation configuration                  |
+| showLabels          | boolean                        | No       | true         | Show labels                              |
 | onValueChange       | (value: number) => void        | No       | -             | Callback when the value changes          |
 | onValueChangeEnd    | (value: string) => void        | No       | -             | Callback when the value changes end      |
 
@@ -166,10 +166,6 @@ const styles = StyleSheet.create({
 | vertical           | boolean                        | No       | false         | Enables vertical orientation             |
 | containerStyle     | ViewStyle                      | No       | -             | Style of the container                   |
 | stepStyle          | ViewStyle                      | No       | -             | Style of the steps                       |
-| showLabels         | boolean                        | No       | false         | Show labels                              |
-| renderLabel        | (value: number) => ReactNode   | No       | -             | Custom renderer for labels               |
-| animationConfig    | AnimationConfig                | No       | -             | Animation configuration                  |
-| theme              | RulerTheme or ThemeName        | No       | -             | Theme for the ruler picker               |
 
 ### RulerTheme
 | Name              | Type   | Required | Default Value | Description                          |
@@ -179,13 +175,6 @@ const styles = StyleSheet.create({
 | longStepColor     | string | No       | 'darkgray'    | Color of the long steps              |
 | textColor         | string | No       | 'black'       | Text color                           |
 | backgroundColor   | string | No       | 'white'       | Background color                     |
-
-### AnimationConfig
-| Name            | Type                            | Required | Default Value | Description                              |
-|-----------------|---------------------------------|----------|---------------|------------------------------------------|
-| duration        | number                         | No       | -             | Duration of the animation                |
-| type            | 'spring' \| 'timing'          | No       | 'timing'      | Type of the animation                    |
-| springConfig    | { tension, friction }          | No       | -             | Configuration for spring animations      |
 
 ### RulerAccessibilityConfig
 | Name                 | Type                            | Required | Default Value | Description                              |
@@ -198,6 +187,7 @@ const styles = StyleSheet.create({
 | decrementAnnouncement| string                         | No       | -             | Announcement for decrement action        |
 
 ## Contributing
+Contributions are welcome! Please fork the repository, make your changes, and submit a pull request.
 
 This library is forked from the original [react-native-ruler-picker](https://github.com/rnheroes/react-native-ruler-picker) repository, and full credit goes to them. This is my first npm package, so there might be bugs. Let’s use it, find and fix issues, and add new features together!
 
