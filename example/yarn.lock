@@ -6406,10 +6406,10 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
 
-react-native-ruler-view@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-ruler-view/-/react-native-ruler-view-0.0.3.tgz#e7760a2113c3fe59558c56caf18edb80323761a2"
-  integrity sha512-vKeFDCPoV3p5TXYsj6NOU+P/T82IsuK01P8LgCh+RAm+yhQymRucOYlNpJz9OB2lns2d5LNsutc2NlODG3jYog==
+react-native-ruler-view@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-ruler-view/-/react-native-ruler-view-0.0.4.tgz#3d7731ff9b6eef85fb6f323971af10638f9b4e09"
+  integrity sha512-ut9V/neE9blqT9B9sLssNA5jEDOdXV+y+e8Rj3WzdfeMAN+Rgv3WkR+wCFiplge79LxXogBs46XU7mfAuUgvXA==
 
 react-native-web@^0.19.13:
   version "0.19.13"
