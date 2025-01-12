@@ -1,31 +1,129 @@
 # react-native-ruler-view
 
-[![npm](https://img.shields.io/npm/dm/react-native-ruler-view)](https://www.npmjs.com/package/react-native-ruler-view) [![HitCount](https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2Frnheroes%2Freact-native-library.json%3Fcolor%3Dblue&show=unique)](http://hits.dwyl.com/rnheroes/react-native-ruler-view)
+A customizable, interactive ruler picker component for React Native. Perfect for selecting values in a range using a ruler-style interface. This library is a fork and modification of [react-native-ruler-picker](https://github.com/rnheroes/react-native-ruler-picker), with added enhancements and improved functionality.
 
-⚡ Lightning-fast and highly customizable Ruler Picker component for React Native with vertical and horizontal support.
+**Full credits to the original author of [react-native-ruler-picker](https://github.com/rnheroes/react-native-ruler-picker).**
 
-![Preview](docs/preview.gif)
+## Features
+
+- Vertical and horizontal orientations.
+- Highly customizable step sizes, unit labels, and themes.
+- Animated step movement with support for spring or timing animations.
+- Haptic feedback and accessibility support.
+- Supports both integer and fractional values.
+- Fine-tuned customization for step heights, widths, and gaps.
+- Ability to configure a range of values with min, max, and step parameters.
+- Option to show labels and unit names next to the value.
+- Full customization over the ruler's theme (colors, text style, background, etc.).
 
 ## Installation
 
-1. `yarn add react-native-ruler-view` or `npm install react-native-ruler-view`
+To install `react-native-ruler-view` into your project, use the following command:
+
+```bash
+npm install react-native-ruler-view
+# or if you're using yarn
+yarn add react-native-ruler-view
+
+## For iOS:
+Make sure to install the necessary CocoaPods dependencies:
 
 ## Usage
+# Basic Examples
 
 ```js
+import * as React from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
 import { RulerPicker } from 'react-native-ruler-view';
 
-<RulerPicker
-  min={0}
-  unit="cm"
-  max={240}
-  step={1}
-  height={300}
-  fractionDigits={0}
-  initialValue={0}
-  onValueChange={(number) => console.log('onValueChange', number)}
-  onValueChangeEnd={(number) => console.log('onValueChangeEnd', number)}
-/>;
+export default function App() {
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}
+    >
+      {/* Basic Ruler */}
+      <RulerPicker
+        min={0}
+        unit="cm"
+        max={240}
+        step={1}
+        width={300}
+        height={300}
+        fractionDigits={0}
+        initialValue={0}
+        onValueChange={(number) => console.log('onValueChange', number)}
+        onValueChangeEnd={(number) => console.log('onValueChangeEnd', number)}
+      />
+
+      {/* Vertical Ruler */}
+      <RulerPicker
+        min={0}
+        max={200}
+        height={300}
+        width={300}
+        step={1}
+        initialValue={0}
+        vertical
+      />
+
+      {/* Ruler with Custom Theme */}
+      <RulerPicker
+        min={0}
+        max={200}
+        step={2}
+        width={240}
+        indicatorHeight={70}
+        height={400}
+        vertical
+        showLabels={false}
+        containerStyle={{
+          backgroundColor: '#876796'
+        }}
+        accessibility={{
+          enabled: true,
+          labelFormat: 'Value: ${value} centimeters',
+          announceValues: true,
+        }}
+        animationConfig={{
+          type: 'spring',
+          springConfig: {
+            tension: 40,
+            friction: 7,
+          },
+        }}
+      />
+
+      {/* Custom themed ruler with haptic feedback */}
+      <RulerPicker
+        min={0}
+        max={200}
+        step={1}
+        hapticFeedback
+        width={300}
+        height={200}
+        containerStyle={{
+          backgroundColor: 'red'
+        }}
+        theme={{
+          indicatorColor: 'green',
+          shortStepColor: 'green',
+          longStepColor: 'blue',
+          textColor: 'green',
+          backgroundColor: 'light',
+        }}
+      />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 20,
+  },
+});
+
 ```
 
 ## Props
@@ -108,6 +206,6 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 MIT
 
----
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 Made with [create-react-native-ruler-view](https://github.com/callstack/react-native-builder-bob)
