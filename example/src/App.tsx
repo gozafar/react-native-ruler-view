@@ -18,8 +18,10 @@ export default function App() {
         height={300}
         fractionDigits={0}
         initialValue={0}
-        onValueChange={(number) => console.log('onValueChange', number)}
-        onValueChangeEnd={(number) => console.log('onValueChangeEnd', number)}
+        onValueChange={(number: number) => console.log('onValueChange', number)}
+        onValueChangeEnd={(number: number) =>
+          console.log('onValueChangeEnd', number)
+        }
       />
 
       {/* Basic usage */}
@@ -43,7 +45,7 @@ export default function App() {
         vertical
         showLabels={false}
         containerStyle={{
-          backgroundColor: '#876796'
+          backgroundColor: '#876796',
         }}
         accessibility={{
           enabled: true,
@@ -68,7 +70,7 @@ export default function App() {
         width={300}
         height={200}
         containerStyle={{
-          backgroundColor: 'red'
+          backgroundColor: 'red',
         }}
         theme={{
           indicatorColor: 'green',
