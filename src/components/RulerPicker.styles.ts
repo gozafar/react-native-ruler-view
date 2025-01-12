@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { RulerTheme } from 'src/utils/types';
+import { RulerTheme } from '../utils/types';
 
 export const getStyles = (
   height: number,

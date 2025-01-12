@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import { RulerPickerItemProp } from 'src/utils/types';
+import { RulerPickerItemProp } from '../utils/types';
 
 export const RulerPickerItem = React.memo(
   ({

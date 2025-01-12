@@ -4,3 +4,4 @@ example/
 **/*.test.js
 ios/
 android/
+docs/
