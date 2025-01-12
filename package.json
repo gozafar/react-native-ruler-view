@@ -1,6 +1,6 @@
 {
   "name": "react-native-ruler-view",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "⚡ Lightning-fast and customizable Ruler Picker component for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
