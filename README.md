@@ -1,6 +1,6 @@
-# react-native-library
+# react-native-ruler-view
 
-[![npm](https://img.shields.io/npm/dm/react-native-library)](https://www.npmjs.com/package/react-native-library) [![HitCount](https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2Frnheroes%2Freact-native-library.json%3Fcolor%3Dblue&show=unique)](http://hits.dwyl.com/rnheroes/react-native-library)
+[![npm](https://img.shields.io/npm/dm/react-native-ruler-view)](https://www.npmjs.com/package/react-native-ruler-view) [![HitCount](https://img.shields.io/endpoint?url=https%3A%2F%2Fhits.dwyl.com%2Frnheroes%2Freact-native-library.json%3Fcolor%3Dblue&show=unique)](http://hits.dwyl.com/rnheroes/react-native-ruler-view)
 
 ⚡ Lightning-fast and highly customizable Ruler Picker component for React Native with vertical and horizontal support.
 
@@ -8,12 +8,12 @@
 
 ## Installation
 
-1. `yarn add react-native-library` or `npm install react-native-library`
+1. `yarn add react-native-ruler-view` or `npm install react-native-ruler-view`
 
 ## Usage
 
 ```js
-import { RulerPicker } from 'react-native-library';
+import { RulerPicker } from 'react-native-ruler-view';
 
 <RulerPicker
   min={0}
@@ -110,4 +110,4 @@ MIT
 
 ---
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+Made with [create-react-native-ruler-view](https://github.com/callstack/react-native-builder-bob)

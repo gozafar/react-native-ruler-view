@@ -307,7 +307,3 @@ export type RulerPickerProps = {
   onValueChangeEnd?: (value: string) => void;
 } & Partial<RulerPickerItemProps>;
 
-export type RulerPickerItemProp = {
-  index: number;
-  isLast: boolean;
-} & RulerPickerItemProps;
