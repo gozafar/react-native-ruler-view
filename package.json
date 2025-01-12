@@ -54,13 +54,13 @@
     "react-native-customizable-ruler",
     "react-native-modern-ruler"
   ],
-  "repository": "https://github.com/Inayat567/react-native-ruler",
+  "repository": "https://github.com/Inayat567/react-native-ruler-view",
   "author": "React Native Heroes <inayatalibalti100@gmail.com> (https://github.com/inayat567)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Inayat567/react-native-ruler/issues"
+    "url": "https://github.com/Inayat567/react-native-ruler-view/issues"
   },
-  "homepage": "https://github.com/Inayat567/react-native-ruler/blob/main/README.md",
+  "homepage": "https://github.com/Inayat567/react-native-ruler-view/blob/main/README.md",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
