@@ -20,13 +20,14 @@ A customizable, interactive ruler picker component for React Native. Perfect for
 
 To install `react-native-ruler-view` into your project, use the following command:
 
-```bash
+bash
 npm install react-native-ruler-view
 # or if you're using yarn
 yarn add react-native-ruler-view
 
 ## For iOS:
 Make sure to install the necessary CocoaPods dependencies:
+cd ios; pod install; cd ..
 
 ## Usage
 # Basic Examples
