@@ -282,16 +282,16 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
     <View pointerEvents="none" style={[styles.displayTextContainer]}>
       {showLabels &&
         getLabel(
-          parseInt(prevValue.current) - step * 2 >= min
-            ? (parseInt(prevValue.current) - step * 2).toString()
+          Number(prevValue.current) - step * 2 >= min
+            ? (Number(prevValue.current) - step * 2).toFixed(fractionDigits).toString()
             : '',
           'lightgray'
         )}
 
       {showLabels &&
         getLabel(
-          parseInt(prevValue.current) - step >= min
-            ? (parseInt(prevValue.current) - step).toString()
+          Number(prevValue.current) - step >= min
+            ? (Number(prevValue.current) - step).toFixed(fractionDigits).toString()
             : '',
           'gray'
         )}
@@ -302,24 +302,24 @@ export const RulerPicker: React.FC<RulerPickerProps> = ({
           numberOfLines={1}
           adjustsFontSizeToFit
         >
-          {parseInt(prevValue.current).toFixed(fractionDigits)}{' '}
+          {Number(prevValue.current).toFixed(fractionDigits)}{' '}
           {unit && <Text style={[styles.unitText, unitTextStyle]}>{unit}</Text>}
         </Text>
       </View>
 
       {showLabels &&
         getLabel(
-          parseInt(prevValue.current) + step >= max + step
+          Number(prevValue.current) + step >= max + step
             ? ''
-            : (parseInt(prevValue.current) + step).toString(),
+            : (Number(prevValue.current) + step).toFixed(fractionDigits).toString(),
           'gray'
         )}
 
       {showLabels &&
         getLabel(
-          parseInt(prevValue.current) + step * 2 >= max + step
+          Number(prevValue.current) + step * 2 >= max + step
             ? ''
-            : (parseInt(prevValue.current) + step * 2).toString(),
+            : (Number(prevValue.current) + step * 2).toFixed(fractionDigits).toString(),
           'lightgray'
         )}
     </View>
